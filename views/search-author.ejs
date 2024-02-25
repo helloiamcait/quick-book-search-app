@@ -1,0 +1,59 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+
+            <% if (locals.contentAuthorList && locals.searchInputLowercase && locals.searchInputTitleCase) { %>
+                <h2 class="result-header mt-3">
+                    Authors Named <span style="color:cornflowerblue">
+                        <%= searchInputTitleCase %>
+                    </span>
+                </h2>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Author</th>
+                            <th scope="col">Top genres</th>
+                            <th scope="col">Top work</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% contentAuthorList.forEach(content=> { %>
+                        <tr>
+                            
+                            <th scope="row"><a href="https://openlibrary.org/authors/<%= content.key %>" target="_blank">
+                                <%= content.author %>
+                            </a></th>
+                            <td>
+                                <% if (content.subjects && content.subjects.length) { %>
+                                    <% content.subjects.forEach((subject, index)=> { %>
+                                        <% if (!subject.includes(":")){ %>
+                                            <a href="https://openlibrary.org/subjects/<%= subject %>" target="_blank"
+                                                style="text-decoration: underline;">
+                                                <%= subject %></a><%= index < content.subjects.length - 1 ? ', ' : '' %>
+                                        <% } %>
+                                    <% }); %>
+                                <% } else { %>
+                                    No genres found.
+                                <% } %>
+                            </td>
+                            <td>
+                                <%= content.topWork %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% }; %>
+                        
+
+
+
+
+
+                
+        </div>
+    </div>
+
+    <%- include("partials/footer.ejs") %>

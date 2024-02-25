@@ -1,0 +1,62 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+
+            <% if (locals.contentGenreList && locals.searchInputLowercase && locals.searchInputTitleCase) { %>
+                <h2 class="result-header mt-3 mb-2">
+                    Top 25 <span style="color:cornflowerblue">
+                        <%= searchInputTitleCase %>
+                    </span> Writers *
+                </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Author</th>
+                            <th scope="col">Top work</th>
+                            <th scope="col" id="genre-col">Genres</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% contentGenreList.forEach(content=> { %>
+                            <tr>
+                                <th scope="row">
+                                    <a href="https://openlibrary.org<%= content.key %>" target="_blank">
+                                        <%= content.authorLastName %>, <%= content.authorFirstName %>
+                                    </a>
+                                </th>
+                                <td>
+                                    <%= content.topWorkSubjects.topWork %>
+                                </td>
+
+                                <td id="genre-col">
+                                    <% if (content.topWorkSubjects.topSubjects &&
+                                        content.topWorkSubjects.topSubjects.length > 0) { %>
+                                        <% content.topWorkSubjects.topSubjects.forEach((subject, index)=> { %>
+                                            <% if (!subject.includes(":")){ %>
+                                                <a href="https://openlibrary.org/subjects/<%= subject %>"
+                                                    target="_blank" style="text-decoration: underline;">
+                                                    <%= subject %></a><%= index < content.topWorkSubjects.topSubjects.length - 1 ? ', ' : '' %>
+                                            <% } %>
+                                        <% }); %>
+                                    <% } else { %>
+                                        No genres found.
+                                    <% } %>
+                                </td>
+
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% }; %>
+
+
+        </div>
+    </div>
+
+    <p mt-5>* Disclaimer: The Top 25 authors list featured on our site is provided by Open Library. These selections are not chosen by
+    us but are based on Open Library's extensive database and criteria, ensuring a diverse and authoritative compilation of
+    authors within each genre.</p>
+
+    <%- include("partials/footer.ejs") %>
