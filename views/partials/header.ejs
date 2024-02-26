@@ -25,18 +25,20 @@
         
         <form action="/search" method="POST" id="search">
             <div class="row">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <select class="custom-select mr-sm-2" id="searchType" name="searchType" required>
-                            <option value="">Choose...</option>
-                            <option value="searchGenre">Genre</option>
-                            <option value="searchAuthor">Author</option>
-                        </select>
-                    </div>
-                    <input type="text" class="form-control" id="searchInput" name="searchInput"
-                        aria-label="Text input with dropdown button" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                <div class="col-md-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <select class="custom-select mr-sm-2" id="searchType" name="searchType" required>
+                                <option value="">Choose...</option>
+                                <option value="searchGenre">Genre</option>
+                                <option value="searchAuthor">Author</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control" id="searchInput" name="searchInput"
+                            aria-label="Text input with dropdown button" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </div>
                     </div>
                 </div>
             </div>
